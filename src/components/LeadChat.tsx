@@ -74,9 +74,10 @@ const LeadChat = ({ contextualInterest }: { contextualInterest?: string }) => {
   const message = question.text.replace("{name}", lead.name || "");
 
   return (
-    <div className="fixed bottom-5 left-5 z-50 font-plex">
+    <div className="fixed bottom-5 right-5 z-50 font-plex">
       {open && (
         <div className="mb-3 w-[calc(100vw-2.5rem)] max-w-sm overflow-hidden rounded-[1.7rem] border border-[#c7a45b]/30 bg-[#0e302e] shadow-2xl shadow-[#0e302e]/40">
+
           <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
             <div className="flex items-center gap-3"><div className="grid h-9 w-9 place-items-center rounded-full border border-[#c7a45b] text-[#e2c88c]"><MessageCircle size={17} /></div><div><p className="font-outfit text-[10px] uppercase tracking-[.18em] text-[#e2c88c]">Lucinari Consulting</p><p className="text-xs text-white/70">Especialista online</p></div></div>
             <button aria-label="Fechar conversa" onClick={() => setOpen(false)} className="text-white/70 hover:text-white"><X size={19} /></button>
