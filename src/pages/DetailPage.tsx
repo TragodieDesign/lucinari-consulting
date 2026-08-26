@@ -1,16 +1,302 @@
 import { ArrowUpRight, Check, ChevronRight, Layers3, ShieldCheck } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import BrandImage from "@/components/BrandImage";
 
-type PageData = { type: "Solução" | "Treinamento"; eyebrow: string; title: string; intro: string; image: string; outcome: string; points: string[]; related: { title: string; text: string }[]; approach: string[]; audience: string[]; faqs: { q: string; a: string }[] };
-const baseFaqs = [{q:"Como começa a atuação?",a:"Começamos por uma conversa de contexto e um diagnóstico proporcional ao desafio. A partir daí, desenhamos uma proposta de trabalho com objetivos, etapas e entregas claras."},{q:"A solução substitui as equipes internas?",a:"Não. A Lucinari trabalha junto das lideranças e dos times para estruturar método, acelerar decisões e deixar capacidade instalada na organização."}];
+type PageData = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image: string;
+  outcome: string;
+  points: string[];
+  approach: string[];
+  audience: string[];
+  related: { title: string; text: string }[];
+  faqs: { q: string; a: string }[];
+};
+
+const baseFaqs = [
+  {
+    q: "Como começa a atuação?",
+    a: "Começamos por uma conversa de contexto e um diagnóstico proporcional ao desafio. A partir daí, desenhamos uma proposta de trabalho com objetivos, etapas e entregas claras.",
+  },
+  {
+    q: "A solução substitui as equipes internas?",
+    a: "Não. A Lucinari trabalha junto das lideranças e dos times para estruturar método, acelerar decisões e deixar capacidade instalada na organização.",
+  },
+];
+
+const approach = [
+  "Revelamos o contexto e o que impede a entrega de avançar.",
+  "Estruturamos modelo, ritos e informações que ajudam a liderança a agir.",
+  "Acompanhamos até que o método se sustente com autonomia.",
+];
+
 const pages: Record<string, PageData> = {
-"governanca-pmo":{type:"Solução",eyebrow:"Governança orientada a resultados",title:"Governança & PMO que conectam estratégia e entrega.",intro:"Estruturamos decisões, ritos e visibilidade para que o portfólio avance com direção clara.",image:"/assets/governanca-pmo.png",outcome:"Mais clareza sobre prioridades, decisões mais rápidas e uma cadência confiável.",points:["Diagnóstico de maturidade e decisões críticas","Modelo de PMO proporcional ao contexto","Ritos executivos, indicadores e reportes","Gestão integrada de portfólio e prioridades"],approach:["Revelamos onde a decisão perde clareza.","Desenhamos uma governança simples de operar.","Acompanhamos a cadência até que o método se sustente."],audience:["Lideranças com portfólio crescente e pouca visibilidade de capacidade.","PMOs que precisam sair do reporte e ganhar relevância na decisão.","Organizações com prioridades concorrentes e ritos pouco claros."],related:[{title:"Estratégia distante da execução",text:"Quando prioridades corporativas não chegam com clareza aos projetos e às equipes."},{title:"Portfólio sem priorização clara",text:"Quando iniciativas competem por recursos sem critérios explícitos de escolha."}],faqs:baseFaqs},
-"vmo-valor":{type:"Solução",eyebrow:"Value Management Office",title:"VMO para tornar valor uma prática visível.",intro:"Conectamos investimentos, fornecedores e iniciativas às prioridades que movem o negócio.",image:"/assets/vmo-valor.png",outcome:"Decisões apoiadas por evidências e impacto mensurável.",points:["Modelo operacional de VMO","Gestão de benefícios e valor","Governança de fornecedores","Priorização dinâmica de investimentos"],approach:["Mapeamos a cadeia entre investimento e resultado.","Definimos critérios de valor que cabem na rotina.","Criamos ritos para aprender e redirecionar escolhas."],audience:["Executivos que precisam comparar investimentos por impacto, não apenas por custo.","Áreas que dependem de fornecedores críticos para entregar estratégia.","Organizações que querem tornar benefícios e resultados acompanháveis."],related:[{title:"Fornecedores sem gestão de valor",text:"Quando contratos são acompanhados por custo, mas não por contribuição ao resultado."},{title:"PMO sem influência nas decisões",text:"Quando a informação existe, mas não chega como evidência útil à liderança."}],faqs:[{q:"VMO é apenas para grandes empresas?",a:"Não. A estrutura pode começar simples e evoluir conforme o volume de investimentos, fornecedores e decisões que precisam ser acompanhadas."},...baseFaqs]},
-"educacao-executiva":{type:"Solução",eyebrow:"Capacitação aplicada",title:"Educação executiva que continua na operação.",intro:"Desenvolvemos líderes e times para traduzirem método em uma nova forma de decidir e entregar.",image:"/assets/educacao-executiva.png",outcome:"Capacidades que permanecem em times mais autônomos e alinhados.",points:["Programas para liderança e times","Métodos ágeis aplicados","OKRs e gestão de valor","Aprendizado conectado a desafios reais"],approach:["Identificamos a capacidade que o contexto pede.","Construímos experiências com casos e decisões reais.","Apoiamos a transferência do método para a rotina."],audience:["Lideranças que precisam alinhar linguagem, método e tomada de decisão.","PMOs e times de projetos que desejam aumentar a maturidade de execução.","Organizações em transformação que precisam transformar conhecimento em rotina."],related:[{title:"Baixa maturidade de PMO",text:"Quando o escritório precisa ganhar método, linguagem e influência."},{title:"Estratégia distante da execução",text:"Quando líderes e equipes ainda não compartilham a mesma rota."}],faqs:baseFaqs},
-"governanca-estrategica-okrs":{type:"Treinamento",eyebrow:"Programa · 06 etapas",title:"Governança Estratégica: da Gestão de Projetos aos OKRs",intro:"Uma abordagem prática para alinhar objetivos, resultados e operações.",image:"/assets/governanca-pmo.png",outcome:"Prioridades estratégicas traduzidas em cadência clara de execução.",points:["Projetos e objetivos em uma direção","OKRs aplicados ao contexto","Ritos de decisão","Indicadores que orientam ação"],approach:["Diagnóstico de contexto.","Conteúdo aplicado a decisões reais.","Plano de transferência para a operação."],audience:["Lideranças, PMOs e gestores de portfólio.","Times que precisam conectar projetos, objetivos e resultados."],related:[{title:"Para lideranças e PMOs",text:"Indicado para quem precisa conectar estratégia, projetos e resultados."},{title:"Formato sob medida",text:"Programa adaptável à realidade da sua organização."}],faqs:baseFaqs},
-"transformacao-pmo-vmo":{type:"Treinamento",eyebrow:"Programa · 06 etapas",title:"Transformação Organizacional: de PMO ao VMO",intro:"Para executivos que desejam evoluir a gestão estratégica e ampliar valor percebido.",image:"/assets/vmo-valor.png",outcome:"Uma visão prática para redesenhar a atuação do PMO.",points:["Evolução PMO para VMO","Priorização de valor","Alinhamento estratégico","Métricas de impacto"],approach:["Leitura do modelo atual.","Novas lentes para decisão.","Roteiro de evolução viável."],audience:["Executivos e gestores que conduzem mudanças organizacionais.","PMOs que querem evoluir para uma atuação orientada a valor."],related:[{title:"Para executivos",text:"Uma conversa estruturada sobre valor, governança e escolha."},{title:"Formato sob medida",text:"Conteúdo calibrado pela maturidade do time."}],faqs:baseFaqs},
-"metodologias-ageis":{type:"Treinamento",eyebrow:"Programa · 06 etapas",title:"Excelência Operacional com Metodologias Ágeis",intro:"Práticas ágeis para criar colaboração, foco e melhoria contínua.",image:"/assets/educacao-executiva.png",outcome:"Participantes preparados para sustentar melhorias nos projetos.",points:["Agilidade aplicada","Ciclos de gestão","Times e prioridades","Melhoria contínua"],approach:["Entendimento do fluxo atual.","Prática guiada de ritos ágeis.","Acordos para aplicação no dia a dia."],audience:["Lideranças e equipes que buscam previsibilidade de entrega.","Times que precisam reduzir ruídos entre prioridades e execução."],related:[{title:"Para liderança e equipes",text:"Para quem busca um ritmo mais claro de entrega e aprendizado."},{title:"Formato sob medida",text:"Conectado à forma como o trabalho acontece hoje."}],faqs:baseFaqs}};
-const openChat=()=>window.dispatchEvent(new Event("open-lucinari-chat"));
-const DetailPage=()=>{const {slug}=useParams();const page=slug?pages[slug]:undefined;useEffect(()=>{if(page)document.title=`${page.title} | Lucinari Consulting`;},[page]);if(!page)return <main className="grid min-h-[60vh] place-items-center bg-[#f3eee1]"><Link to="/">Voltar ao início</Link></main>;return <main className="bg-[#f3eee1]"><section className="bg-[#0e302e] px-6 py-20 text-white lg:px-10 lg:py-28"><div className="mx-auto grid max-w-7xl items-end gap-10 lg:grid-cols-[1.1fr_.9fr]"><div><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#e2c88c]">{page.type} · {page.eyebrow}</p><h1 className="mt-5 font-fraunces text-5xl leading-[.96] lg:text-7xl">{page.title}</h1><p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">{page.intro}</p><button onClick={openChat} className="mt-8 rounded-full bg-[#c7a45b] px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-[#0e302e]">Falar com especialista</button></div><img src={page.image} className="aspect-[4/3] rounded-[1.8rem] object-cover" alt=""/></div></section><section className="px-6 py-20 lg:px-10"><div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2"><div><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">O que muda</p><h2 className="mt-4 font-fraunces text-4xl">{page.outcome}</h2><p className="mt-5 max-w-md leading-relaxed text-[#0e302e]/70">A atuação combina diagnóstico, desenho do modelo e uma cadência que transforma decisão em rotina de trabalho.</p></div><div className="grid gap-3">{page.points.map((item,i)=><div className="flex items-center gap-4 rounded-2xl bg-white p-5" key={item}><span className="font-outfit text-[#a07c3a]">0{i+1}</span><p className="font-fraunces text-xl">{item}</p><Check className="ml-auto text-[#a07c3a]" size={18}/></div>)}</div></div></section><section className="bg-white px-6 py-20 lg:px-10"><div className="mx-auto max-w-7xl"><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Como trabalhamos</p><div className="mt-7 grid gap-4 md:grid-cols-3">{page.approach.map((item,index)=><div key={item} className="rounded-2xl border border-[#0e302e]/10 p-6"><span className="font-outfit text-xs text-[#a07c3a]">0{index+1}</span><p className="mt-6 font-fraunces text-2xl">{item}</p></div>)}</div></div></section><section className="px-6 py-20 lg:px-10"><div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[.8fr_1.2fr]"><div><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Para quem faz sentido</p><h2 className="mt-4 font-fraunces text-4xl">O método precisa caber na sua realidade.</h2></div><div className="space-y-4">{page.audience.map(item=><p className="flex gap-3 leading-relaxed" key={item}><ShieldCheck className="mt-1 shrink-0 text-[#a07c3a]" size={18}/>{item}</p>)}</div></div></section><section className="bg-[#1e514a] px-6 py-16 text-white lg:px-10"><div className="mx-auto max-w-7xl"><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#e2c88c]">Desafios que esta solução resolve</p><div className="mt-7 grid gap-4 md:grid-cols-2">{page.related.map(item=><button key={item.title} onClick={openChat} className="group flex items-start gap-4 rounded-2xl border border-white/15 p-5 text-left transition hover:bg-white/10"><Layers3 className="mt-1 text-[#e2c88c]"/><div><h3 className="font-fraunces text-xl">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-white/65">{item.text}</p></div><ChevronRight className="ml-auto mt-1 text-[#e2c88c]"/></button>)}</div></div></section><section className="bg-[#fffdf8] px-6 py-20 lg:px-10"><div className="mx-auto max-w-4xl"><p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Perguntas frequentes</p><div className="mt-5 divide-y divide-[#0e302e]/10">{page.faqs.map(faq=><details key={faq.q} className="group py-5"><summary className="flex cursor-pointer list-none items-center justify-between font-fraunces text-xl">{faq.q}<ChevronRight className="transition group-open:rotate-90"/></summary><p className="mt-3 max-w-2xl leading-relaxed text-[#0e302e]/70">{faq.a}</p></details>)}</div></div></section><section className="px-6 py-16 text-center lg:px-10"><h2 className="font-fraunces text-4xl">Vamos revelar o próximo passo?</h2><button onClick={openChat} className="mt-6 rounded-full bg-[#0e302e] px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-white">Conversar sobre este contexto <ArrowUpRight className="ml-1 inline" size={15}/></button></section></main>;};
+  "governanca-gestao-projetos": {
+    eyebrow: "Pilar 01",
+    title: "Governança & Gestão Estratégica de Projetos",
+    intro: "Conectando a visão executiva à execução tática com previsibilidade e dados.",
+    image: "/assets/governanca-pmo.png",
+    outcome: "Decisões com direção clara e um portfólio que entrega com previsibilidade.",
+    points: [
+      "Alinhamento e priorização estratégica de portfólio",
+      "Estruturação de processos e rituais de governança pragmáticos (sem burocracia)",
+      "Implantação de métricas de saúde, riscos e dashboards executivos em tempo real",
+      "Diagnóstico de maturidade e plano de evolução metodológica",
+      "Definição e gestão dos OKRs",
+    ],
+    approach,
+    audience: [
+      "Executivos que precisam conectar estratégia, projetos e resultados com previsibilidade.",
+      "PMOs e gestores de portfólio que desejam ritos leves e úteis.",
+      "Organizações que precisam priorizar melhor e decidir com dados.",
+    ],
+    related: [
+      {
+        title: "Estratégia distante da execução",
+        text: "Quando prioridades não chegam com clareza aos projetos e às equipes.",
+      },
+      {
+        title: "Portfólio sem priorização clara",
+        text: "Quando iniciativas competem por recursos sem critérios explícitos de escolha.",
+      },
+    ],
+    faqs: baseFaqs,
+  },
+  "estruturacao-pmo-vmo": {
+    eyebrow: "Pilar 02",
+    title: "Estruturação e Otimização de PMO / VMO",
+    intro: "Evoluindo a gestão de projetos para um centro gerador e mensurador de valor.",
+    image: "/assets/vmo-valor.png",
+    outcome: "Um escritório de projetos que passa a medir e ampliar valor, não só controlar entregas.",
+    points: [
+      "Implantação e reestruturação de PMOs (Estratégico, Tático ou Operacional)",
+      "Transição de PMO tradicional para VMO (Value Management Office)",
+      "Padronização de processos e templates e adequação das metodologias",
+    ],
+    approach,
+    audience: [
+      "Organizações que querem implantar ou reestruturar um PMO com propósito claro.",
+      "PMOs que precisam evoluir para uma atuação orientada a valor.",
+      "Lideranças que desejam medir benefícios e impacto das iniciativas.",
+    ],
+    related: [
+      {
+        title: "PMO focado em reporte, não em valor",
+        text: "Quando o escritório acompanha status, mas não contribui para decisões de valor.",
+      },
+      {
+        title: "Processos pesados e baixa aderência",
+        text: "Quando templates e ritos existem, mas não se encaixam na realidade dos times.",
+      },
+    ],
+    faqs: baseFaqs,
+  },
+  "gestao-agil": {
+    eyebrow: "Pilar 03",
+    title: "Gestão Ágil & Transformação",
+    intro: "Acelerando a velocidade de resposta ao negócio e reduzindo o retrabalho.",
+    image: "/assets/gestao-agil.png",
+    outcome: "Times que respondem mais rápido ao negócio, com menos retrabalho e mais foco.",
+    points: [
+      "Implementação personalizada de frameworks ágeis (Scrum, Kanban, Lean)",
+      "Agilidade integrada além da TI (áreas de negócio, operações e liderança)",
+      "Acompanhamento contínuo para sustentação cultural",
+      "Modelos híbridos de gestão adaptados à realidade e criticidade de cada projeto",
+    ],
+    approach,
+    audience: [
+      "Lideranças e equipes que precisam de maior velocidade de resposta ao negócio.",
+      "Organizações que querem levar a agilidade além da TI.",
+      "Times com retrabalho, prioridades conflitantes ou ciclos longos de entrega.",
+    ],
+    related: [
+      {
+        title: "Agilidade limitada à TI",
+        text: "Quando as práticas ágeis não alcançam negócio, operações e liderança.",
+      },
+      {
+        title: "Retrabalho e ciclos longos",
+        text: "Quando falta fluxo claro entre prioridade, execução e aprendizado.",
+      },
+    ],
+    faqs: baseFaqs,
+  },
+  "educacao-executiva": {
+    eyebrow: "Pilar 04",
+    title: "Educação Executiva & Capacitação Corporativa",
+    intro: "Desenvolvendo competências dos times e as lideranças para sustentar a mudança com autonomia.",
+    image: "/assets/educacao-executiva.png",
+    outcome: "Capacidade instalada para sustentar a transformação com autonomia.",
+    points: [
+      "Treinamentos práticos de gestão de projetos, metodologia ágil e estratégia por OKRs",
+      "Desenvolvimento de liderança ágil, cultura de valor e colaboração",
+      "Workshops executivos in-company aplicados a desafios reais da empresa",
+    ],
+    approach,
+    audience: [
+      "Lideranças que precisam alinhar linguagem, método e tomada de decisão.",
+      "Times e PMOs que desejam aumentar a maturidade de execução.",
+      "Organizações em transformação que precisam transformar conhecimento em rotina.",
+    ],
+    related: [
+      {
+        title: "Conhecimento sem aplicação prática",
+        text: "Quando treinamentos não se conectam aos desafios reais do negócio.",
+      },
+      {
+        title: "Mudança que não se sustenta",
+        text: "Quando a capacidade não permanece após o projeto.",
+      },
+    ],
+    faqs: baseFaqs,
+  },
+};
+
+const openChat = () => window.dispatchEvent(new Event("open-lucinari-chat"));
+
+const DetailPage = () => {
+  const { slug } = useParams();
+  const page = slug ? pages[slug] : undefined;
+
+  useEffect(() => {
+    if (page) document.title = `${page.title} | Lucinari Consulting`;
+  }, [page]);
+
+  if (!page)
+    return (
+      <main className="grid min-h-[60vh] place-items-center bg-[#f3eee1]">
+        <Link to="/">Voltar ao início</Link>
+      </main>
+    );
+
+  return (
+    <main className="bg-[#f3eee1]">
+      <section className="bg-[#0e302e] px-6 py-20 text-white lg:px-10 lg:py-28">
+        <div className="mx-auto grid max-w-7xl items-end gap-10 lg:grid-cols-[1.1fr_.9fr]">
+          <div>
+            <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#e2c88c]">
+              Serviço · {page.eyebrow}
+            </p>
+            <h1 className="mt-5 font-fraunces text-5xl leading-[.96] lg:text-7xl">{page.title}</h1>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/70">{page.intro}</p>
+            <button
+              onClick={openChat}
+              className="mt-8 rounded-full bg-[#c7a45b] px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-[#0e302e]"
+            >
+              Falar com especialista
+            </button>
+          </div>
+          <BrandImage src={page.image} alt="" className="aspect-[4/3] rounded-[1.8rem]" icon={<Layers3 className="h-8 w-8" />} label={page.title} tone="mid" />
+        </div>
+      </section>
+
+      <section className="px-6 py-20 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
+          <div>
+            <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">O que fazemos</p>
+            <h2 className="mt-4 font-fraunces text-4xl">{page.outcome}</h2>
+            <p className="mt-5 max-w-md leading-relaxed text-[#0e302e]/70">
+              A atuação combina diagnóstico, desenho do modelo e uma cadência que transforma decisão em rotina de trabalho.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {page.points.map((item, i) => (
+              <div className="flex items-center gap-4 rounded-2xl bg-white p-5" key={item}>
+                <span className="font-outfit text-[#a07c3a]">0{i + 1}</span>
+                <p className="font-fraunces text-xl">{item}</p>
+                <Check className="ml-auto text-[#a07c3a]" size={18} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-20 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Como trabalhamos</p>
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {page.approach.map((item, index) => (
+              <div key={item} className="rounded-2xl border border-[#0e302e]/10 p-6">
+                <span className="font-outfit text-xs text-[#a07c3a]">0{index + 1}</span>
+                <p className="mt-6 font-fraunces text-2xl">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-20 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[.8fr_1.2fr]">
+          <div>
+            <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Para quem faz sentido</p>
+            <h2 className="mt-4 font-fraunces text-4xl">O método precisa caber na sua realidade.</h2>
+          </div>
+          <div className="space-y-4">
+            {page.audience.map((item) => (
+              <p className="flex gap-3 leading-relaxed" key={item}>
+                <ShieldCheck className="mt-1 shrink-0 text-[#a07c3a]" size={18} />
+                {item}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#1e514a] px-6 py-16 text-white lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#e2c88c]">
+            Desafios que este serviço resolve
+          </p>
+          <div className="mt-7 grid gap-4 md:grid-cols-2">
+            {page.related.map((item) => (
+              <button
+                key={item.title}
+                onClick={openChat}
+                className="group flex items-start gap-4 rounded-2xl border border-white/15 p-5 text-left transition hover:bg-white/10"
+              >
+                <Layers3 className="mt-1 text-[#e2c88c]" />
+                <div>
+                  <h3 className="font-fraunces text-xl">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">{item.text}</p>
+                </div>
+                <ChevronRight className="ml-auto mt-1 text-[#e2c88c]" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#fffdf8] px-6 py-20 lg:px-10">
+        <div className="mx-auto max-w-4xl">
+          <p className="font-outfit text-[11px] font-bold uppercase tracking-[.2em] text-[#a07c3a]">Perguntas frequentes</p>
+          <div className="mt-5 divide-y divide-[#0e302e]/10">
+            {page.faqs.map((faq) => (
+              <details key={faq.q} className="group py-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between font-fraunces text-xl">
+                  {faq.q}
+                  <ChevronRight className="transition group-open:rotate-90" />
+                </summary>
+                <p className="mt-3 max-w-2xl leading-relaxed text-[#0e302e]/70">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 text-center lg:px-10">
+        <h2 className="font-fraunces text-4xl">Vamos revelar o próximo passo?</h2>
+        <button
+          onClick={openChat}
+          className="mt-6 rounded-full bg-[#0e302e] px-6 py-3.5 font-outfit text-xs font-bold uppercase tracking-wider text-white"
+        >
+          Conversar sobre este contexto <ArrowUpRight className="ml-1 inline" size={15} />
+        </button>
+      </section>
+    </main>
+  );
+};
+
 export default DetailPage;
