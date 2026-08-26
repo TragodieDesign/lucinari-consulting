@@ -22,9 +22,24 @@ const openChat = () => window.dispatchEvent(new Event("open-lucinari-chat"));
 
 const Index = () => (
   <main className="bg-[#f3eee1] text-[#0e302e]">
-    <section className="relative min-h-[680px] overflow-hidden bg-[#0e302e]">
-      <BrandImage src="https://lucinari-consulting-strapi-lucinari.raftvs.easypanel.host/uploads/lucinari_hero_af4c4ec903.png" alt="Lideranças em uma conversa estratégica" className="absolute inset-0 h-full w-full" imgClassName="opacity-55" />
-      <div className="absolute inset-0 bg-[#0e302e]/60" />
+    <section className="relative overflow-hidden bg-[#0e302e] text-white">
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#c7a45b">
+          <circle cx="1160" cy="340" r="150" strokeWidth="1.5" opacity="0.5" />
+          <circle cx="1160" cy="340" r="250" strokeWidth="1.5" opacity="0.32" />
+          <circle cx="1160" cy="340" r="350" strokeWidth="1.5" opacity="0.2" />
+          <circle cx="1160" cy="340" r="450" strokeWidth="1.5" opacity="0.12" />
+          <circle cx="1160" cy="340" r="560" strokeWidth="1.5" opacity="0.07" />
+        </g>
+        <g fill="#c7a45b">
+          <circle cx="1160" cy="190" r="6" opacity="0.9" />
+          <circle cx="1160" cy="490" r="6" opacity="0.9" />
+          <circle cx="1010" cy="340" r="6" opacity="0.8" />
+          <circle cx="1310" cy="340" r="6" opacity="0.8" />
+          <circle cx="1100" cy="260" r="4" opacity="0.6" />
+          <circle cx="1220" cy="420" r="4" opacity="0.6" />
+        </g>
+      </svg>
       <div className="relative mx-auto flex min-h-[680px] max-w-7xl items-end px-6 pb-20 pt-36 lg:px-10">
         <div className="max-w-3xl">
           <p className="font-outfit text-[11px] font-bold uppercase tracking-[.22em] text-[#e2c88c]">Gestão de Projetos · Gestão Ágil · Governança · PMO</p>
