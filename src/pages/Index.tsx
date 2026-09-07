@@ -24,7 +24,7 @@ const Index = () => (
   <main className="bg-[#f3eee1] text-[#0e302e]">
     <section className="relative overflow-hidden bg-[#0e302e] text-white">
       <img
-        src="https://lucinari-consulting-strapi-lucinari.raftvs.easypanel.host/uploads/lucinari_hero_af4c4ec903.png"
+        src="/assets/lucinari-home-hero.png"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover object-center"
