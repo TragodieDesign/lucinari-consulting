@@ -98,7 +98,7 @@ const pages: Record<string, PageData> = {
     eyebrow: "Pilar 03",
     title: "Gestão Ágil & Transformação",
     intro: "Acelerando a velocidade de resposta ao negócio e reduzindo o retrabalho.",
-    image: "/assets/gestao-agil.png",
+    image: "/assets/Margareth_Consulting_Agile.png",
     outcome: "Times que respondem mais rápido ao negócio, com menos retrabalho e mais foco.",
     points: [
       "Implementação personalizada de frameworks ágeis (Scrum, Kanban, Lean)",
