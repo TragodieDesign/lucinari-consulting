@@ -65,8 +65,8 @@ const AboutPage = () => {
       <section className="bg-white px-6 py-20 lg:px-10">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[.8fr_1.2fr]">
           <div className="rounded-[1.8rem] bg-[#0e302e] p-8">
-            <div className="mx-auto grid aspect-square w-full max-w-[20rem] place-items-center rounded-full border border-[#c7a45b]/40 bg-[#123c38]">
-              <span className="font-fraunces text-7xl text-[#e2c88c]">ML</span>
+            <div className="mx-auto grid aspect-square w-full max-w-[20rem] place-items-center overflow-hidden rounded-full border border-[#c7a45b]/40 bg-[#123c38]">
+              <img src="/assets/MargarethLucinari.jpeg" alt="Margareth Lucinari, fundadora da Lucinari Consulting" className="h-full w-full object-cover" />
             </div>
           </div>
           <div>
